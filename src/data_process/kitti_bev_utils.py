@@ -165,8 +165,11 @@ def drawRotatedBox(img, x, y, w, l, yaw, color):
     corners_int = bev_corners.reshape(-1, 1, 2).astype(int)
     cv2.polylines(img, [corners_int], True, color, 2)
     corners_int = bev_corners.reshape(-1, 2)
-    cv2.line(img, (corners_int[0, 0], corners_int[0, 1]), (corners_int[3, 0], corners_int[3, 1]), (255, 255, 0), 2)
-
+    pt1 = (int(corners_int[0, 0]), int(corners_int[0, 1]))
+    pt2 = (int(corners_int[3, 0]), int(corners_int[3, 1]))
+    
+    # Draw the line indicating orientation
+    cv2.line(img, pt1, pt2, (255, 255, 0), 2)
 
 def draw_box_in_bev(rgb_map, target):
     for j in range(50):
